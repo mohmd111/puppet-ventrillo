@@ -64,7 +64,7 @@ class ventrilo::rhel::config {
         owner   => 'root',
         group   => 'root',
         mode    => '0755',
-        content => template('ventrilo/etc/init.d/ventrilo_srv.ini.erb'),
+        content => template('ventrilo/etc/init.d/ventrilo_init.erb'),
       }#End init file
 
     }#end configfiles should be present case
