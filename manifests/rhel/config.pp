@@ -6,7 +6,7 @@
 #
 Anchor['ventrilo::package::end'] -> Class['ventrilo::rhel::config']
 class ventrilo::rhel::config {
-  include ventrilo::params #make our parameters local scope
+  #make our parameters local scope
   File{} -> Anchor['ventrilo::config::end']
   $ensure        = $ventrilo::ensure
   $adminpassword = $ventrilo::adminpass
