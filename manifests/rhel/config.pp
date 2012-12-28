@@ -90,7 +90,7 @@ class ventrilo::rhel::config {
 
     }#end configfiles should be absent case
     default: {
-      notice "ventrilo::params::ensure has an unsupported value of ${ventrilo::params::ensure}."
+      notice "ventrilo::ensure has an unsupported value of ${ventrilo::ensure}."
     }#end default ensure case
   }#end ensure case
 }#end class
