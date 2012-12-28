@@ -6,7 +6,7 @@
 #
 Anchor['ventrilo::package::end'] -> Class['ventrilo::rhel::config']
 class ventrilo::rhel::config {
-  include ventrilo::params #make our parameters local scope
+  #make our parameters local scope
   File{} -> Anchor['ventrilo::config::end']
   $ensure        = $ventrilo::ensure
   $adminpassword = $ventrilo::adminpass
@@ -39,8 +39,9 @@ class ventrilo::rhel::config {
         path    =>  "/usr/local/ventsrv/${ventport}.ini",
         owner   => 'root',
         group   => 'root',
-        mode    => '0644',
+        mode    => '0640',
         content => template('ventrilo/usr/local/ventsrv/ventrilo_srv.ini.erb'),
+        require => Package['Ventrilo'],
       }#end ventrilo_conf file
 
       file {'ventrilo_defaultconf':
@@ -48,8 +49,9 @@ class ventrilo::rhel::config {
         path    => '/usr/local/ventsrv/ventrilo_srv.ini',
         owner   => 'ventrilo',
         group   => 'ventrilo',
-        mode    => '0644',
-        source  => "puppet:///modules/${module_name}/ventrilo_srv.ini"
+        mode    => '0640',
+        source  => "puppet:///modules/${module_name}/ventrilo_srv.ini",
+        require => Package['Ventrilo'],
       }#end ventrilod.conf file
 
       file {'/usr/local/ventsrv':
@@ -64,7 +66,8 @@ class ventrilo::rhel::config {
         owner   => 'root',
         group   => 'root',
         mode    => '0755',
-        content => template('ventrilo/etc/init.d/ventrilo_srv.ini.erb'),
+        content => template('ventrilo/etc/init.d/ventrilo_init.erb'),
+        require => Package['Ventrilo'],
       }#End init file
 
     }#end configfiles should be present case
@@ -87,7 +90,7 @@ class ventrilo::rhel::config {
 
     }#end configfiles should be absent case
     default: {
-      notice "ventrilo::params::ensure has an unsupported value of ${ventrilo::params::ensure}."
+      notice "ventrilo::ensure has an unsupported value of ${ventrilo::ensure}."
     }#end default ensure case
   }#end ensure case
 }#end class

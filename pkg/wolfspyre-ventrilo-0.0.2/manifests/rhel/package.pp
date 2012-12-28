@@ -18,7 +18,7 @@ class ventrilo::rhel::package {
       } -> Anchor['ventrilo::package::end']
     }#end absent case
     default: {
-      notice "ventrilo::params::ensure has an unsupported value of ${ventrilo::params::ensure}."
+      notice "ventrilo::ensure has an unsupported value of ${ventrilo::ensure}."
     }#end default ensure case
   }#end ensure case
 }#end class

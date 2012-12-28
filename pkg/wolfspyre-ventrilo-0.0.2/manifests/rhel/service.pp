@@ -4,10 +4,10 @@ Anchor['ventrilo::config::end'] -> Class['ventrilo::rhel::service']
 class ventrilo::rhel::service {
   Service{} -> Anchor['ventrilo::service::end']
   # end of variables
-  case $ventrilo::params::ensure {
+  case $ventrilo::ensure {
     enabled, active: {
       #everything should be installed, but puppet is not managing the state of the service
-      service {'ventrilo_srv':
+      service {'ventrilo':
         ensure    => running,
         enable    => true,
         subscribe => File['ventrilo_conf'],
@@ -16,7 +16,7 @@ class ventrilo::rhel::service {
       }#end service definition
     }#end enabled class
     disabled, stopped: {
-      service {'ventrilod':
+      service {'ventrilo':
         ensure    => stopped,
         enable    => false,
         subscribe => File['ventrilo_conf'],

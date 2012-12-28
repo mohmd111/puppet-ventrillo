@@ -1,0 +1,34 @@
+{
+  "summary": "Voice chat server software",
+  "types": [
+
+  ],
+  "author": "wolfspyre",
+  "project_page": "UNKNOWN",
+  "checksums": {
+    "spec/spec_helper.rb": "a55d1e6483344f8ec6963fcb2c220372",
+    "templates/usr/local/ventsrv/ventrilo_srv.ini.erb": "c92a1974e0817999932a31276eac83c1",
+    "files/ventrilo_srv-3.0.3-Linux-i386.tar.gz": "0f6af5a3dc1935e83cfb4cb37e210007",
+    "files/ventriloscript-v2.1.0_02.tar.gz": "2073641e704e9b380fac65259178fe64",
+    "files/Ventrilo-3.0.3-1.x86_64.rpm": "e85384de5b67b955c2521bf13626aa21",
+    "README": "1cb14542dd9883cc414f857732a10472",
+    "manifests/rhel/package.pp": "c836d53d7c72ed873e9eb513776533bc",
+    "templates/etc/init.d/ventrilo_init.erb": "0bea8362d5fe40ff50d3680ed8bb2cd3",
+    "README.md": "08017ba17a08f449fcfeb6c9373520c9",
+    "manifests/rhel/config.pp": "19537f06ac47e81faaf8ec668a7a4a96",
+    "manifests/init.pp": "2bddfecdc800cf50472f93a20748103a",
+    "manifests/rhel/service.pp": "d177d5b8f639dc20ea5c49f9c1530bc8",
+    "files/ventrilo_srv.ini": "3e242d135bb26b37615877ff0e7b7e59",
+    "tests/init.pp": "b30e799fc5bcbd8bb0e4c00f6b38e24c",
+    "Modulefile": "74e89c977728009b64d7ea78b6cbce67",
+    "files/ventrilo.spec": "91010cb408d67f2230fada20b217cfbe"
+  },
+  "source": "UNKNOWN",
+  "dependencies": [
+
+  ],
+  "license": "Custom",
+  "name": "wolfspyre-ventrilo",
+  "version": "0.0.2",
+  "description": "see www.ventrilo.com for details of the software"
+}
