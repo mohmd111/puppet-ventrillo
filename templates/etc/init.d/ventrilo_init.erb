@@ -7,10 +7,11 @@
 
 #Replace the values of VENPATH and VENSRV with your ventrilo path and server name.
 #Replace the value of VENUSER with the account name that ventrilo runs under.
-VENPATH=/home/ventrilo
-VENSRV=$VENPATH/ventrilo_srv
-VENUSER=ventrilo
-VENPORT=3784
+VENPATH='/usr/local/ventsrv'
+VENSRV="$VENPATH/ventrilo_srv"
+VENUSER='ventrilo'
+VENPORT='3784'
+VENINI='ventrilo_srv.ini'
 
 if [ "$UID" -ne 0 ]; then
   echo "You must be root to run this script"
@@ -18,20 +19,35 @@ if [ "$UID" -ne 0 ]; then
 fi
 
 check_pid (){
-  if [ -e $VENPATH/$1.pid ]; then
-    PID=`cat $VENPATH/$1.pid`
+  if [ -z $1 ]; then
+    PORT=${VENPORT}
+  else
+    PORT=$1
+  fi
+  if [ -e ${VENPATH}/${PORT}.pid ]; then
+    PID=`cat ${VENPATH}/${PORT}.pid`
   else
     PID=0
   fi
 }
-
+check_ini (){
+  if [ -z $1 ]; then
+    PORT=${VENPORT}
+  else
+    PORT=$1
+  fi
+  if [ ! -f ${VENPATH}/${VENPORT}.ini ]; then
+    su ${VENUSER} -s /bin/bash -c "cp ${VENPATH}/${VENINI} ${VENPATH}/${VENPORT}.ini"
+  fi
+}
 start (){
   if [ -z $1 ]; then
     PORT=${VENPORT}
   else
     PORT=$1
   fi
-  su ${VENUSER} -c "${VENSRV} -f${VENPATH}/${PORT} -d"
+  check_ini
+  su ${VENUSER} -s /bin/bash -c "${VENSRV} -f${VENPATH}/${PORT} -d"
   check_pid ${PORT}
   if [ ${PID} -ne 0 ]; then
     renice -20 ${PID}
@@ -98,7 +114,7 @@ case $1 in
       exit 0
     else
       echo
-      echo "Ventrilo server on Port:"$2" -Not Running-"
+      echo "Ventrilo server on Port:${PORT} -Not Running-"
       echo
       exit 1
     fi
