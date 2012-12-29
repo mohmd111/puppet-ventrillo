@@ -9,7 +9,7 @@ class ventrilo::rhel::config {
   #make our parameters local scope
   File{} -> Anchor['ventrilo::config::end']
   $ensure        = $ventrilo::ensure
-  $adminpassword = $ventrilo::adminpass
+  $adminpass     = $ventrilo::adminpassword
   $authmode      = $ventrilo::authmode
   $autokick      = $ventrilo::autokick
   $chanclients   = $ventrilo::chanclients
@@ -31,6 +31,11 @@ class ventrilo::rhel::config {
   $voicecodec    = $ventrilo::voicecodec
   $voiceformat   = $ventrilo::voiceformat
   # end of variables
+  #notice "ensure = $ensure adminpassword = $adminpass authmode  = $authmode  $autokick = $autokick"
+  #notice "chanclients = $chanclients chandepth = $chandepth chanwidth = $chanwidth closestd = $closestd"
+  #notice "disablequit = $disablequit duplicates = $duplicates extrabuffer = $extrabuffer logontimeout = $logontimeout"
+  #notice "password = $password pingrate = $pingrate recvbuffer = $recvbuffer sendbuffer = $sendbuffer servername = $servername"
+  #notice "silentlobby = $silentlobby timestamp = $timestamp ventport = $ventport voicecodec = $voicecodec voiceformat = $voiceformat"
   case $ensure {
     present, enabled, active, disabled, stopped: {
       #everything should be installed
@@ -50,7 +55,7 @@ class ventrilo::rhel::config {
         owner   => 'ventrilo',
         group   => 'ventrilo',
         mode    => '0640',
-        source  => "puppet:///modules/${module_name}/ventrilo_srv.ini",
+        content => template('ventrilo/usr/local/ventsrv/ventrilo_srv.ini.erb'),
         require => Package['Ventrilo'],
       }#end ventrilod.conf file
 

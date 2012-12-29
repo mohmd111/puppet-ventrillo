@@ -184,7 +184,7 @@
 #
 class ventrilo(
   $ventrilo_ensure        = hiera('ventrilo_ensure',       'enabled'),
-  $ventrilo_adminpassword = hiera('ventrilo_adminpass',    UNDEF ),
+  $ventrilo_adminpassword = hiera('ventrilo_adminpassword',    UNDEF ),
   $ventrilo_authmode      = hiera('ventrilo_authmode',     '0'),
   $ventrilo_autokick      = hiera('ventrilo_autokick',     '0' ),
   $ventrilo_chanclients   = hiera('ventrilo_chanclients',  '0' ),
