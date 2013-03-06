@@ -4,8 +4,8 @@
 #  iptables rule should we ever decide to add iptables rules automagically:
 #      -A RH-Firewall-1-INPUT -p tcp -m tcp --dport ventriloport -j ACCEPT
 #
-Anchor['ventrilo::package::end'] -> Class['ventrilo::rhel::config']
 class ventrilo::rhel::config {
+  Anchor['ventrilo::package::end'] -> Class['ventrilo::rhel::config']
   #make our parameters local scope
   File{} -> Anchor['ventrilo::config::end']
   $ensure        = $ventrilo::ensure

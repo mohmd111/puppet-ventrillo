@@ -1,7 +1,7 @@
 # == Class: ventrilo::rhel::service
 #  wrapper class
-Anchor['ventrilo::config::end'] -> Class['ventrilo::rhel::service']
 class ventrilo::rhel::service {
+  Anchor['ventrilo::config::end'] -> Class['ventrilo::rhel::service']
   Service{} -> Anchor['ventrilo::service::end']
   # end of variables
   case $ventrilo::ensure {
